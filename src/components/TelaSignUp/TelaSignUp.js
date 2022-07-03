@@ -4,21 +4,21 @@ import { Link } from "react-router-dom";
 
 import Inputs from "./Inputs";
 
-function TelaSingUp() {
+function TelaSignUp() {
   return (
-    <SingUp>
+    <SignUp>
       <Logotipo>
         <h1>MyWallet</h1>
       </Logotipo>
       <Inputs />
       <Link to="/" style={{ textDecoration: "none" }}>
-        <LogSigIn>Já tem uma conta? Entre agora!</LogSigIn>
+        <LogSignIn>Já tem uma conta? Entre agora!</LogSignIn>
       </Link>
-    </SingUp>
+    </SignUp>
   );
 }
 
-const SingUp = styled.div`
+const SignUp = styled.div`
   width: 100vw;
   height: 100vh;
   background-color: var(--cor-fundo-tela);
@@ -41,7 +41,7 @@ const Logotipo = styled.div`
   }
 `;
 
-const LogSigIn = styled.p`
+const LogSignIn = styled.p`
   font-weight: 700;
   font-size: 15px;
   line-height: 18px;
@@ -49,4 +49,4 @@ const LogSigIn = styled.p`
   color: var(--cor-branco);
 `;
 
-export default TelaSingUp;
+export default TelaSignUp;

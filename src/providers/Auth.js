@@ -5,12 +5,9 @@ export const AuthContext = React.createContext({});
 
 export function AuthProvider({ children }) {
   const [user, setUser] = useState({
-    id: "",
     name: "",
-    image:
-      "https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/StadeFranceNationsLeague2018.jpg/800px-StadeFranceNationsLeague2018.jpg",
+    email: "",
     token: "",
-    done: 0,
     entrou: false,
   });
 

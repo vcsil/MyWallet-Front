@@ -3,8 +3,8 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import Reset from "../assets/styles/reset";
 import GlobalStyle from "../assets/styles/globalStyles";
-import TelaLogin from "./TelaLogin/TelaLogin";
-import TelaSingUp from "./TelaSingUp/TelaSingUp";
+import TelaSignIn from "./TelaSignIn/TelaSignIn";
+import TelaSignUp from "./TelaSignUp/TelaSignUp";
 
 function App() {
   return (
@@ -13,8 +13,9 @@ function App() {
       <Reset />
 
       <Routes>
-        <Route path="/" element={<TelaLogin />} />
-        <Route path="/cadastro" element={<TelaSingUp />} />
+        <Route path="/" element={<TelaSignIn />} />
+        <Route path="/cadastro" element={<TelaSignUp />} />
+        <Route path="/registros" element={<h1>Oii</h1>} />
       </Routes>
     </BrowserRouter>
   );

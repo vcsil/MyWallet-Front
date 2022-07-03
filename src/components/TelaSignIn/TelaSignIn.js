@@ -4,21 +4,21 @@ import { Link } from "react-router-dom";
 
 import Inputs from "./Inputs";
 
-function TelaLogin() {
+function TelaSignIn() {
   return (
-    <Login>
+    <SignIn>
       <Logotipo>
         <h1>MyWallet</h1>
       </Logotipo>
       <Inputs />
       <Link to="/cadastro" style={{ textDecoration: "none" }}>
-        <LogSigIn>Primeira vez? Cadastre-se!</LogSigIn>
+        <LogSignIn>Primeira vez? Cadastre-se!</LogSignIn>
       </Link>
-    </Login>
+    </SignIn>
   );
 }
 
-const Login = styled.div`
+const SignIn = styled.div`
   width: 100vw;
   height: 100vh;
   background-color: var(--cor-fundo-tela);
@@ -41,7 +41,7 @@ const Logotipo = styled.div`
   }
 `;
 
-const LogSigIn = styled.p`
+const LogSignIn = styled.p`
   font-weight: 700;
   font-size: 15px;
   line-height: 18px;
@@ -49,4 +49,4 @@ const LogSigIn = styled.p`
   color: var(--cor-branco);
 `;
 
-export default TelaLogin;
+export default TelaSignIn;
