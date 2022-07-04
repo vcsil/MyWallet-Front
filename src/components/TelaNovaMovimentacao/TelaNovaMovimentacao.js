@@ -37,12 +37,18 @@ function TelaNovaMovimentacao({ movimentacao }) {
     setCarregando(true);
 
     const URL = "http://localhost:5000/movimentacao";
-    const promise = axios.post(URL, {
+    const config = {
+      headers: {
+        Authorization: `Bearer ${user.token}`,
+      },
+    };
+    const body = {
       date: dayjs(Date.now()).format("DD/MM"),
       descricao,
       valor,
       movimentacao,
-    });
+    };
+    const promise = axios.post(URL, body, config);
     promise.then((response) => {
       BoxAviso(response.status);
       navigate("/registros");
