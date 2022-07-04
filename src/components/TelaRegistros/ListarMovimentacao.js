@@ -27,7 +27,6 @@ function CadaUm(obj, index) {
 
 function ListarMovimentacao({ obj }) {
   const temMovimentacao = obj.length !== 0;
-  console.log(temMovimentacao, obj.length, obj);
 
   return (
     <>

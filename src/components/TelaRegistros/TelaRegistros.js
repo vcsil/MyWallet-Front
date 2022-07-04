@@ -16,7 +16,6 @@ function TelaRegistros() {
   const [mostraAviso, setMostraAviso] = useState([]);
 
   function atualizaEntrada() {
-    console.log(user.entrou);
     setUser({
       ...user,
       entrou: true,
