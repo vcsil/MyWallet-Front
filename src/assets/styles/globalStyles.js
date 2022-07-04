@@ -88,8 +88,7 @@ const GlobalStyle = createGlobalStyle`
   main{
     width: 100vw;
     height: 100vh;
-    padding: 92px 18px 0;
-    margin-bottom: 172px;
+    padding: 78px 18px 0;
   }
 
   .titulo {

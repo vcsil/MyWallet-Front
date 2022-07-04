@@ -5,12 +5,10 @@ import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { AuthContext } from "../../providers/Auth";
 
-function Header(props) {
+function Header({ entrou }) {
   const navigate = useNavigate();
 
   const { user, setUser } = React.useContext(AuthContext);
-
-  const { entrou } = props;
 
   function Sair() {
     setUser({ ...user, name: "", email: "", token: "", entrou: false });

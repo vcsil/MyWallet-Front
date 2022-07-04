@@ -51,7 +51,11 @@ function Inputs() {
       promise.catch((err) => {
         navigate("/cadastro");
         setCarregando(false);
-        BoxAviso(err.response.data);
+        const mensagem =
+          typeof err.response.data === "undefined"
+            ? "Servidor desconectado"
+            : err.response.data;
+        BoxAviso(mensagem);
       });
     }
   }
