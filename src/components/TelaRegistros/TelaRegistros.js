@@ -1,7 +1,22 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
 
+import { AuthContext } from "../../providers/Auth";
+
 function TelaRegistros() {
+  const { user, setUser } = React.useContext(AuthContext);
+
+  function atualizaEntrada() {
+    setUser({
+      ...user,
+      entrou: true,
+    });
+  }
+
+  useEffect(() => {
+    atualizaEntrada();
+  }, [user.entrou]);
+
   return (
     <Main>
       <ContainerRegistros>

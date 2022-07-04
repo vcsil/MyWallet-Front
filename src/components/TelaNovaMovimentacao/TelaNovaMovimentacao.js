@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Bars } from "react-loader-spinner";
 import styled from "styled-components";
 import axios from "axios";
@@ -48,7 +48,6 @@ function TelaNovaMovimentacao({ movimentacao }) {
       navigate("/registros");
     });
     promise.catch((err) => {
-      console.log("parou");
       const mensagem =
         typeof err.response.data === "undefined"
           ? "Servidor desconectado"
@@ -60,12 +59,13 @@ function TelaNovaMovimentacao({ movimentacao }) {
 
   useEffect(() => {
     atualizaEntrada();
-    console.log(movimentacao);
   }, [user.entrou]);
 
   return (
     <Container>
-      <h1>Nova {movimentacao}</h1>
+      <Link to="/registros" style={{ textDecoration: "none" }}>
+        <h1>Nova {movimentacao}</h1>
+      </Link>
       <form className="boxInputs" onSubmit={SubmitData}>
         <input
           placeholder="Valor"

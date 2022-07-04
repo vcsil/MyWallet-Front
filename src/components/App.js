@@ -15,7 +15,6 @@ function App() {
   const { user } = React.useContext(AuthContext);
 
   const { entrou } = user;
-  console.log("app", entrou);
   return (
     <BrowserRouter>
       <GlobalStyle />
