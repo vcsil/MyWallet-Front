@@ -36,7 +36,7 @@ function TelaNovaMovimentacao({ movimentacao }) {
     event.preventDefault();
     setCarregando(true);
 
-    const URL = "http://localhost:5000/movimentacao";
+    const URL = "https://mywallet-backend-vai.herokuapp.com/movimentacao";
     const config = {
       headers: {
         Authorization: `Bearer ${user.token}`,

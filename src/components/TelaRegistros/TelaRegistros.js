@@ -11,6 +11,7 @@ import Aviso from "../Aviso";
 function TelaRegistros() {
   const { user, setUser } = React.useContext(AuthContext);
 
+  const [saldo, setSaldo] = useState(0);
   const [carregando, setCarregando] = useState(false);
   const [movimentacao, setMovimentacao] = useState([]);
   const [mostraAviso, setMostraAviso] = useState([]);
@@ -33,7 +34,7 @@ function TelaRegistros() {
     atualizaEntrada();
     setCarregando(true);
 
-    const URL = "http://localhost:5000/movimentacao";
+    const URL = "https://mywallet-backend-vai.herokuapp.com/movimentacao";
     const config = {
       headers: {
         Authorization: `Bearer ${user.token}`,
@@ -60,7 +61,12 @@ function TelaRegistros() {
         {carregando ? (
           <Bars height="40" width="40" color="magenta" ariaLabel="loading" />
         ) : (
-          <ListarMovimentacao key={0} obj={movimentacao} />
+          <ListarMovimentacao
+            key={0}
+            obj={movimentacao}
+            saldo={saldo}
+            setSaldo={setSaldo}
+          />
         )}
       </ContainerRegistros>
       {mostraAviso.map((i) => i)}

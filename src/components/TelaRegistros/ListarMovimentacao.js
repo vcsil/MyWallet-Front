@@ -7,7 +7,14 @@ import styled from "styled-components";
 // import { AuthContext } from "../../providers/Auth.js";
 // import Aviso from "../Aviso";
 
-function CadaUm(obj, index) {
+function CadaUm(obj, index, saldo, setSaldo) {
+  const anterior = Number(saldo);
+  if (obj.movimentacao === "entrada" && anterior !== -19) {
+    setSaldo(Number(obj.valor));
+  } else {
+    setSaldo(Number(obj.valor));
+  }
+
   return (
     <Linha key={index}>
       <Data>{obj.date}</Data>
@@ -25,13 +32,28 @@ function CadaUm(obj, index) {
   );
 }
 
-function ListarMovimentacao({ obj }) {
+function ListarMovimentacao({ obj, saldo, setSaldo }) {
   const temMovimentacao = obj.length !== 0;
 
+  const obj2 = [
+    {
+      date: "30/11",
+      descricao: "Almoço mãe",
+      valor: 39.9,
+      movimentacao: "saida",
+    },
+    {
+      date: "30/11",
+      descricao: "Almoço mãe",
+      valor: 39.9,
+      movimentacao: "entrada",
+    },
+  ];
+  console.log(saldo);
   return (
     <>
-      {temMovimentacao ? (
-        obj.map((i, index) => CadaUm(i, index))
+      {!temMovimentacao ? (
+        obj2.map((i, index) => CadaUm(i, index, saldo, setSaldo))
       ) : (
         <Texto>
           Não há registros de <br />

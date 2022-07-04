@@ -36,7 +36,7 @@ function Inputs() {
       event.preventDefault();
       setCarregando(true);
 
-      const URL = "http://localhost:5000/sign-up";
+      const URL = "https://mywallet-backend-vai.herokuapp.com/sign-up";
       const promise = axios.post(URL, {
         name,
         email,
