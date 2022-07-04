@@ -33,13 +33,13 @@ function Inputs() {
     });
     setCarregando(false);
 
-    // const dadosSerializados = JSON.stringify({
-    //   name: props.name,
-    //   email: props.email,
-    //   token: props.token,
-    //   entrou: true,
-    // });
-    // localStorage.setItem("usuario", dadosSerializados);
+    const dadosSerializados = JSON.stringify({
+      name: props.name,
+      email: props.email,
+      token: props.token,
+      entrou: true,
+    });
+    localStorage.setItem("usuario", dadosSerializados);
 
     navigate("/registros");
   }
@@ -64,7 +64,11 @@ function Inputs() {
       entrando(response.data);
     });
     promise.catch((err) => {
-      BoxAviso(err.response.data);
+      const mensagem =
+        typeof err.response.data === "undefined"
+          ? "Servidor desconectado"
+          : err.response.data;
+      BoxAviso(mensagem);
       setCarregando(false);
     });
   }

@@ -1,5 +1,4 @@
-import React, { useState, useMemo } from "react";
-import PropTypes from "prop-types";
+import React, { useState, useEffect } from "react";
 
 export const AuthContext = React.createContext({});
 
@@ -11,26 +10,24 @@ export function AuthProvider({ children }) {
     entrou: false,
   });
 
-  // useEffect(() => {
-  //     if (localStorage.getItem("usuario")) {
-  //             const usuario = localStorage.getItem("usuario");
-  //             const objetoUsuario = JSON.parse(usuario);
-  //             setUser({...user,
-  //                     id: objetoUsuario.id,
-  //                     name: objetoUsuario.name,
-  //                     entrou: objetoUsuario.entrou,
-  //                     image: objetoUsuario.image,
-  //                     token: objetoUsuario.token});
-  //         }
-  // }, [])
+  useEffect(() => {
+    if (localStorage.getItem("usuario")) {
+      const usuario = localStorage.getItem("usuario");
+      const objetoUsuario = JSON.parse(usuario);
+      setUser({
+        ...user,
+        name: objetoUsuario.name,
+        email: objetoUsuario.email,
+        token: objetoUsuario.token,
+        entrou: objetoUsuario.entrou,
+      });
+    }
+  }, []);
 
-  const usuario = useMemo(() => ({ user, setUser }), []);
+  // eslint-disable-next-line react/jsx-no-constructed-context-values
+  const usuario = { user, setUser };
 
   return (
     <AuthContext.Provider value={usuario}>{children}</AuthContext.Provider>
   );
 }
-
-AuthProvider.propTypes = {
-  children: PropTypes.element.isRequired,
-};
