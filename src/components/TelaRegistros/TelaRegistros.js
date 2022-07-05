@@ -99,6 +99,7 @@ const ContainerRegistros = styled.div`
   padding: 24px 12px 0;
   background-color: white;
   border-radius: 5px;
+  position: relative;
 `;
 
 const BoxBars = styled.div`

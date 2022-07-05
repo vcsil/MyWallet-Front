@@ -23,11 +23,25 @@ function CadaUm(obj, index) {
 
 function ListarMovimentacao({ obj }) {
   const temMovimentacao = obj.length !== 0;
-
+  obj.movimentacao?.reverse();
   return (
     <>
       {temMovimentacao ? (
-        obj.map((i, index) => CadaUm(i, index))
+        <>
+          {obj.movimentacao.map((i, index) => CadaUm(i, index))}
+          <BoxSaldo>
+            <p>Saldo</p>
+            <Valor
+              cor={
+                Number(obj.saldo) >= 0
+                  ? "var(--cor-verde)"
+                  : "var(--cor-vermelho)"
+              }
+            >
+              {obj.saldo}
+            </Valor>
+          </BoxSaldo>
+        </>
       ) : (
         <Texto>
           Não há registros de <br />
@@ -69,7 +83,7 @@ const Descricao = styled.span`
 const Valor = styled.span`
   font-weight: 400;
   font-size: 16px;
-  line-height: 19px;
+  line-height: 20px;
   text-align: right;
   color: ${(props) => props.cor};
 `;
@@ -84,6 +98,24 @@ const Texto = styled.p`
   justify-content: center;
   align-items: center;
   color: var(--cor-cinza-escuro);
+`;
+
+const BoxSaldo = styled.span`
+  position: absolute;
+  display: flex;
+  justify-content: space-between;
+  background-color: white;
+  bottom: 10px;
+  left: 15px;
+  right: 12px;
+  /* z-index: 2; */
+
+  p {
+    font-weight: 700;
+    font-size: 17px;
+    line-height: 20px;
+    text-align: left;
+  }
 `;
 
 export default ListarMovimentacao;
