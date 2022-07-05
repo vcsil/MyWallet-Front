@@ -9,10 +9,9 @@ export function AuthProvider({ children }) {
     token: "",
     entrou: false,
   });
-
   useEffect(() => {
-    if (localStorage.getItem("usuario")) {
-      const usuario = localStorage.getItem("usuario");
+    const usuario = localStorage.getItem("usuario");
+    if (usuario) {
       const objetoUsuario = JSON.parse(usuario);
       setUser({
         ...user,

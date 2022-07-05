@@ -1,5 +1,6 @@
 /* eslint-disable react/no-array-index-key */
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { Bars } from "react-loader-spinner";
 import styled from "styled-components";
 import axios from "axios";
@@ -9,9 +10,9 @@ import ListarMovimentacao from "./ListarMovimentacao";
 import Aviso from "../Aviso";
 
 function TelaRegistros() {
+  const navigate = useNavigate();
   const { user, setUser } = React.useContext(AuthContext);
 
-  const [saldo, setSaldo] = useState(0);
   const [carregando, setCarregando] = useState(false);
   const [movimentacao, setMovimentacao] = useState([]);
   const [mostraAviso, setMostraAviso] = useState([]);
@@ -23,21 +24,26 @@ function TelaRegistros() {
     });
   }
 
+  function deuErro() {
+    setMostraAviso([]);
+    setUser({ ...user, name: "", email: "", token: "", entrou: false });
+    localStorage.removeItem("usuario");
+    navigate("/");
+  }
+
   function BoxAviso(mensagem) {
     setMostraAviso([
       ...mostraAviso,
-      <Aviso key={0} mensagem={mensagem} ok={() => setMostraAviso([])} />,
+      <Aviso key={0} mensagem={mensagem} ok={() => deuErro()} />,
     ]);
   }
 
-  useEffect(() => {
-    atualizaEntrada();
+  function getMovimentacao({ token }) {
     setCarregando(true);
-
     const URL = "https://mywallet-backend-vai.herokuapp.com/movimentacao";
     const config = {
       headers: {
-        Authorization: `Bearer ${user.token}`,
+        Authorization: `Bearer ${token}`,
       },
     };
     const promise = axios.get(URL, config);
@@ -53,20 +59,28 @@ function TelaRegistros() {
           : err.response.data;
       BoxAviso(mensagem);
     });
-  }, [user.entrou]);
+  }
+
+  useEffect(() => {
+    atualizaEntrada();
+    const usuario = localStorage.getItem("usuario");
+    if (usuario) {
+      const objetoUsuario = JSON.parse(usuario);
+      getMovimentacao(objetoUsuario);
+      return;
+    }
+    getMovimentacao(user);
+  }, []);
 
   return (
     <Main>
       <ContainerRegistros>
         {carregando ? (
-          <Bars height="40" width="40" color="magenta" ariaLabel="loading" />
+          <BoxBars>
+            <Bars height="40" width="40" color="magenta" ariaLabel="loading" />
+          </BoxBars>
         ) : (
-          <ListarMovimentacao
-            key={0}
-            obj={movimentacao}
-            saldo={saldo}
-            setSaldo={setSaldo}
-          />
+          <ListarMovimentacao key={0} obj={movimentacao} />
         )}
       </ContainerRegistros>
       {mostraAviso.map((i) => i)}
@@ -85,6 +99,14 @@ const ContainerRegistros = styled.div`
   padding: 24px 12px 0;
   background-color: white;
   border-radius: 5px;
+`;
+
+const BoxBars = styled.div`
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;
 
 export default TelaRegistros;

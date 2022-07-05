@@ -1,20 +1,9 @@
-/* eslint-disable react/destructuring-assignment */
 /* eslint-disable react/jsx-no-useless-fragment */
+/* eslint-disable react/destructuring-assignment */
 import React from "react";
-// import axios from "axios";
 import styled from "styled-components";
 
-// import { AuthContext } from "../../providers/Auth.js";
-// import Aviso from "../Aviso";
-
-function CadaUm(obj, index, saldo, setSaldo) {
-  const anterior = Number(saldo);
-  if (obj.movimentacao === "entrada" && anterior !== -19) {
-    setSaldo(Number(obj.valor));
-  } else {
-    setSaldo(Number(obj.valor));
-  }
-
+function CadaUm(obj, index) {
   return (
     <Linha key={index}>
       <Data>{obj.date}</Data>
@@ -32,28 +21,13 @@ function CadaUm(obj, index, saldo, setSaldo) {
   );
 }
 
-function ListarMovimentacao({ obj, saldo, setSaldo }) {
+function ListarMovimentacao({ obj }) {
   const temMovimentacao = obj.length !== 0;
 
-  const obj2 = [
-    {
-      date: "30/11",
-      descricao: "Almoço mãe",
-      valor: 39.9,
-      movimentacao: "saida",
-    },
-    {
-      date: "30/11",
-      descricao: "Almoço mãe",
-      valor: 39.9,
-      movimentacao: "entrada",
-    },
-  ];
-  console.log(saldo);
   return (
     <>
-      {!temMovimentacao ? (
-        obj2.map((i, index) => CadaUm(i, index, saldo, setSaldo))
+      {temMovimentacao ? (
+        obj.map((i, index) => CadaUm(i, index))
       ) : (
         <Texto>
           Não há registros de <br />
